@@ -21,5 +21,13 @@ public class App {
             model.put("template","templates/index.vtl");
             return new ModelAndView(model, layout);
         }, new VelocityTemplateEngine());
+
+        get("/squad/new", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            String title = "New Squad";
+            model.put("title",title);
+            model.put("template","templates/new-squad-form.vtl");
+            return new ModelAndView(model, layout);
+        }, new VelocityTemplateEngine())
     }
 }

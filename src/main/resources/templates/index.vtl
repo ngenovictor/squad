@@ -1,7 +1,11 @@
+<p>This is the home page</p>
 #if($squads)
     #foreach ($squad in $squads)
         <p>$squad.getName()</p>
     #end
 #else
     <p>You aint got no squads</p>
+    <p>Add a Squad below</p>
 #end
+
+<a href="/squad/new"><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Create Squad</button></a>
