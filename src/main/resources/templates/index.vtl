@@ -1,0 +1,7 @@
+#if($squads)
+    #foreach ($squad in $squads)
+        <p>$squad.getName()</p>
+    #end
+#else
+    <p>You aint got no squads</p>
+#end
