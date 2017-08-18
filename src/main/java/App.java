@@ -1,5 +1,9 @@
-/**
- * Created by kingkong on 8/18/17.
- */
+import spark.ModelAndView;
+import spark.template.velocity.VelocityTemplateEngine;
+import static spark.Spark.*;
+
 public class App {
+    public static void main(String[] args){
+        get("/");
+    }
 }
