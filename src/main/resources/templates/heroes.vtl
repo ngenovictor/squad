@@ -1,0 +1,8 @@
+<h1>Heroes</h1>
+#foreach($hero in $heroes)
+    <hr/>
+    <p>$hero.getId()<span>.</span> $hero.getName()</p>
+    <p>Special Power: $hero.getSpecialPower()</p>
+    <p>Weakness: $hero.getWeakness()</p>
+    <p>Age: $hero.getAge()</p>
+#end
