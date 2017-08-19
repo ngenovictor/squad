@@ -88,5 +88,19 @@ public class App {
             model.put("template", "templates/hero-detail.vtl");
             return new ModelAndView(model, layout);
         },new VelocityTemplateEngine());
+        get("/squads", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            model.put("squads", Squad.all());
+            model.put("template","templates/squads.vtl");
+            model.put("title","Squads");
+            return new ModelAndView(model, layout);
+        }, new VelocityTemplateEngine());
+        get("/heroes", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            model.put("heroes", Hero.all());
+            model.put("title", "Heores");
+            model.put("template", "templates/heroes.vtl");
+            return new ModelAndView(model, layout);
+        }, new VelocityTemplateEngine());
     }
 }
