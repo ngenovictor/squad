@@ -1,4 +1,8 @@
 <h1>$squad.getName()</h1>
+#if($message)
+    <p class="addheromessage">$message</p>
+#end
+
 <p>This squad has a maximum capacity of $squad.getSize() Heroes.</p>
 #if($squad.getHeros().size()>0)
     <p>It currently holds the following Heroes</p>

@@ -47,6 +47,7 @@ public class App {
             String newSquadCause = request.queryParams("squad-cause");
             Squad mySquad = new Squad(newSquadName,newSquadMaxSize,newSquadCause);
             String title = "New Squad";
+            request.session().attribute("squads", Squad.all());
             model.put("title",title);
             model.put("squad", mySquad);
             model.put("template","templates/new-squad-success.vtl");
@@ -64,16 +65,22 @@ public class App {
 
         post("/squad/:id/addhero", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
-            String heroName = request.queryParams("hero-name");
-            int heroAge = Integer.parseInt(request.queryParams("hero-age"));
-            String heroPower =request.queryParams("special-power");
-            String heroWeakness = request.queryParams("weakness");
-
-            Hero myHero = new Hero(heroName,heroAge,heroPower,heroWeakness);
 
             Squad chosenSquad = Squad.find(Integer.parseInt(request.params("id")));
-//            chosenSquad.getHeros().indexOf(myHero);
-            chosenSquad.getHeros().add(myHero);
+            if(chosenSquad.getHeros().size()==chosenSquad.getSize()){
+                String message = "Could not add the hero to squad. It is already full. ";
+                model.put("message", message);
+            }else{
+                String heroName = request.queryParams("hero-name");
+                int heroAge = Integer.parseInt(request.queryParams("hero-age"));
+                String heroPower =request.queryParams("special-power");
+                String heroWeakness = request.queryParams("weakness");
+                Hero myHero = new Hero(heroName,heroAge,heroPower,heroWeakness);
+                chosenSquad.getHeros().add(myHero);
+                String message = "The Hero was added successfully";
+                model.put("message", message);
+            }
+
             model.put("title", chosenSquad.getName());
             model.put("squad",chosenSquad);
             model.put("template", "templates/squad-details.vtl");
@@ -90,7 +97,7 @@ public class App {
         },new VelocityTemplateEngine());
         get("/squads", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
-            model.put("squads", Squad.all());
+            model.put("squads", request.session().attribute("squads"));
             model.put("template","templates/squads.vtl");
             model.put("title","Squads");
             return new ModelAndView(model, layout);

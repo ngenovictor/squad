@@ -67,6 +67,17 @@ public class SquadTest {
         assertTrue(mySquad.getHeros().contains(myHero));
     }
     @Test
+    public void Squad_addHeros_cannotAddMoreThanItsMaxSize_false(){
+        Squad mySquad = new Squad("Changers", 2, "Climate Change");
+        Hero myHero = new Hero("Wangari", 50, "Environment ambassador","corruption");
+        Hero secondHero = new Hero("Wangari", 50, "Environment ambassador","corruption");
+        Hero thirdHero = new Hero("Wangari", 50, "Environment ambassador","corruption");
+        mySquad.addHero(Hero.find(myHero.getId()));
+        mySquad.addHero(Hero.find(secondHero.getId()));
+        mySquad.addHero(Hero.find(thirdHero.getId()));
+        assertFalse(mySquad.getHeros().contains(thirdHero));
+    }
+    @Test
     public void Squad_removeHero_removesHeroFromASquad_false(){
         Hero firstHero = new Hero("Wangari", 50, "Environment ambassador","corruption");
         Hero secondHero = new Hero("Sonko", 40, "Governer","Nairobians Littering Everywhere");

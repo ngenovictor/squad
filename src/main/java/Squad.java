@@ -50,7 +50,9 @@ public class Squad {
         return mHeros;
     }
     public void addHero(Hero myHero){
-        mHeros.add(myHero);
+        if (mHeros.size()<mMaxSize){
+            mHeros.add(myHero);
+        }
     }
     public void removeHero(Hero myHero){
         mHeros.remove(myHero);
