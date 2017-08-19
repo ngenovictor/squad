@@ -3,7 +3,7 @@
     <p class="addheromessage">$message</p>
 #end
 
-<p>This squad has a maximum capacity of $squad.getSize() Heroes.</p>
+<p>This squad has a maximum capacity of <span class="addheromessage">$squad.getSize()</span> Heroes.</p>
 #if($squad.getHeros().size()>0)
     <p>It currently holds the following Heroes</p>
     #foreach($hero in $squad.getHeros())
@@ -14,6 +14,7 @@
     <p>It currently has no Heroes</p>
 #end
 <button class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#exampleModal">Add Heros to $squad.getName() Squad</button>
+<a href="/squad/delete/$squad.getId()"><button class="btn btn-outline-danger my-2 my-sm-0">Delete $squad.getName()</button></a>
 
 <div class="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">

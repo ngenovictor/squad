@@ -76,6 +76,7 @@ public class App {
                 String heroPower =request.queryParams("special-power");
                 String heroWeakness = request.queryParams("weakness");
                 Hero myHero = new Hero(heroName,heroAge,heroPower,heroWeakness);
+                request.session().attribute("heroes", Hero.all());
                 chosenSquad.getHeros().add(myHero);
                 String message = "The Hero was added successfully";
                 model.put("message", message);
@@ -104,9 +105,24 @@ public class App {
         }, new VelocityTemplateEngine());
         get("/heroes", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
-            model.put("heroes", Hero.all());
-            model.put("title", "Heores");
+            model.put("heroes", request.session().attribute("heroes"));
+            model.put("title", "Heroes");
             model.put("template", "templates/heroes.vtl");
+            return new ModelAndView(model, layout);
+        }, new VelocityTemplateEngine());
+        get("/squad/delete/:id", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            Squad.remove(Integer.parseInt(request.params("id")));
+            model.put("title","Deleted Successfully");
+            model.put("template", "templates/index.vtl");
+            return new ModelAndView(model, layout);
+        }, new VelocityTemplateEngine());
+
+        get("/hero/delete/:id", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            Hero.remove(Integer.parseInt(request.params("id")));
+            model.put("title","Deleted Successfully");
+            model.put("template", "templates/index.vtl");
             return new ModelAndView(model, layout);
         }, new VelocityTemplateEngine());
     }
