@@ -1,6 +1,7 @@
 ## Squad
 This app that allows you to recruit a well-balanced team of superheroes (or any other character-type of your choosing).
 
+As seen on [link](https://squad-moringaip.herokuapp.com/)
 **Specs**
 - **_Hero_** _object_: Has a name, age, special power and weakness. Special powers and weaknesses could be freely assignable or you may offer users a pre-determined set to choose from.
 
