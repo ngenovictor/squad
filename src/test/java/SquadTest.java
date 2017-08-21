@@ -1,3 +1,4 @@
+import org.junit.After;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -5,6 +6,10 @@ import static org.junit.Assert.*;
  * Created by kingkong on 8/18/17.
  */
 public class SquadTest {
+    @After
+    public void tearDown(){
+        Squad.clear();
+    }
     @Test
     public void Squad_instantiatesCorrectly_true(){
         Squad mySquad = new Squad("Changers", 3, "Climate Change");
@@ -86,6 +91,16 @@ public class SquadTest {
         mySquad.addHero(Hero.find(secondHero.getId()));
         mySquad.removeHero(Hero.find(secondHero.getId()));
         assertFalse(mySquad.getHeros().contains(secondHero));
+    }
+    @Test
+    public void Squad_removeHero_reassignsIdsBasedOnRemainingSquads_int(){
+        Squad firstSquad = new Squad("Changers", 3, "Climate Change");
+        Squad secondSquad = new Squad("Changers", 3, "Climate Change");
+        Squad thirdSquad = new Squad("Changers", 3, "Climate Change");
+
+        Squad.remove(secondSquad.getId());
+        assertEquals(2, thirdSquad.getId());
+
     }
 
 }

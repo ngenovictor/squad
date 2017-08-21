@@ -44,7 +44,12 @@ public class Squad {
         instances.clear();
     }
     public static void remove(int id){
+        
         instances.remove(id-1);
+
+        for (Squad squad:instances) {
+            squad.mId = instances.indexOf(squad)+1;
+        }
     }
     public List<Hero> getHeros(){
         return mHeros;
